@@ -181,7 +181,12 @@ export function escapeRegExpChars(value) {
 export function removeDiacriticsFromString(value) {
     if (!value) return value
 
-    return value.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    //Only normalize when value type === string
+    if (typeof value === 'string' || value instanceof String) {
+        return value.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    } else {
+        return value;
+    }
 }
 
 export function multiColumnSort(inputArray, sortingPriority) {
